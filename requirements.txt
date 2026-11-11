@@ -3,3 +3,4 @@ Flask-SQLAlchemy
 Werkzeug
 gunicorn
 psycopg2-binary
+psycopg[binary]
