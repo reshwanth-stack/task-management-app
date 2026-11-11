@@ -1083,3 +1083,485 @@ select {
         width: 100%;
     }
 }
+
+/* ==========================================
+   MODERN DASHBOARD DESIGN - STEP 1
+========================================== */
+
+/* Smooth page experience */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f5f7fc;
+    color: #1e293b;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Main dashboard layout */
+.dashboard-container {
+    max-width: 1250px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 35px 25px;
+}
+
+/* Dashboard header */
+.dashboard-header {
+    background: #ffffff;
+    padding: 24px 30px;
+    border: 1px solid #e8edf5;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+}
+
+.dashboard-header h1 {
+    color: #2563eb;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Logout button */
+.logout-button {
+    background: #ef4444;
+    padding: 11px 22px;
+    border-radius: 9px;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.logout-button:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+/* Welcome section */
+.dashboard-content {
+    margin-top: 32px;
+}
+
+.dashboard-content > h2 {
+    color: #0f172a;
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.dashboard-content > p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* Main dashboard cards */
+.dashboard-card {
+    background: #ffffff;
+    padding: 28px;
+    margin-top: 25px;
+    border: 1px solid #e8edf5;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+    transition: box-shadow 0.25s ease;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+}
+
+.dashboard-card h3 {
+    color: #1e293b;
+    font-size: 20px;
+}
+
+/* Statistics cards */
+.statistics-container {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.stat-card {
+    background: #f8faff;
+    border: 1px solid #e5eaf5;
+    border-radius: 13px;
+    padding: 22px 12px;
+    transition: 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: #bfdbfe;
+    box-shadow: 0 7px 18px rgba(37, 99, 235, 0.08);
+}
+
+.stat-card h4 {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.stat-card p {
+    color: #1d4ed8;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+/* Progress section */
+.progress-container {
+    height: 12px;
+    background: #e8edf5;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    border-radius: 20px;
+}
+
+/* Task chart */
+.chart-track {
+    height: 12px;
+    background: #e8edf5;
+}
+
+.completed-fill {
+    background: #16a34a;
+}
+
+.pending-fill {
+    background: #f59e0b;
+}
+
+/* Responsive statistics */
+@media (max-width: 900px) {
+    .statistics-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    .dashboard-header {
+        padding: 18px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 22px;
+    }
+
+    .dashboard-content > h2 {
+        font-size: 23px;
+    }
+
+    .dashboard-card {
+        padding: 18px;
+    }
+
+    .statistics-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 18px 8px;
+    }
+
+    .stat-card p {
+        font-size: 25px;
+    }
+}
+/* MODERN DASHBOARD DESIGN - STEP 2 */
+
+/* Task cards */
+.task-item {
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 13px;
+    padding: 22px;
+    margin-bottom: 18px;
+    transition: all 0.25s ease;
+}
+
+.task-item:hover {
+    border-color: #bfdbfe;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.07);
+    transform: translateY(-2px);
+}
+
+.task-info h3 {
+    color: #1e293b;
+    font-size: 18px;
+    font-weight: 650;
+}
+
+/* Task details */
+.task-status,
+.task-priority,
+.task-category {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 5px 4px 5px 0;
+}
+
+/* Due dates */
+.task-due-date {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.overdue {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.due-today {
+    color: #d97706;
+    font-weight: 700;
+}
+
+/* Task action buttons */
+.task-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 15px;
+}
+
+.update-button,
+.delete-button {
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.update-button {
+    background: #2563eb;
+    color: white;
+}
+
+.update-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.delete-button {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.delete-button:hover {
+    background: #fecaca;
+    transform: translateY(-2px);
+}
+
+/* Edit form */
+.edit-form {
+    background: #f8faff;
+    border: 1px solid #e5eaf2;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+    .task-item {
+        padding: 16px;
+    }
+
+    .task-actions {
+        gap: 7px;
+    }
+
+    .update-button,
+    .delete-button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+/* MODERN DASHBOARD DESIGN - STEP 3 */
+
+/* Form inputs */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dbe3ef;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #1e293b;
+    font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #334155;
+    font-weight: 600;
+}
+
+/* Main form buttons */
+.create-task-button,
+.auth-button {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.create-task-button:hover,
+.auth-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.cancel-button {
+    background: #e2e8f0;
+    color: #334155;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Search and filter section */
+.search-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+}
+
+.search-header input,
+.search-header select {
+    min-height: 43px;
+    padding: 10px 13px;
+    border: 1px solid #dbe3ef;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #1e293b;
+}
+
+.search-header input:focus,
+.search-header select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.clear-button {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    border-radius: 9px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.clear-button:hover {
+    background: #dbeafe;
+}
+
+/* Form messages */
+.message {
+    border-radius: 9px;
+    padding: 12px 15px;
+    margin: 12px 0;
+}
+/* MODERN DASHBOARD DESIGN - STEP 4 */
+
+/* Create task form buttons */
+.create-task-button {
+    width: auto;
+    min-width: 150px;
+}
+
+.cancel-button {
+    margin-left: 10px;
+}
+
+/* Task action buttons in one row */
+.task-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Better subtask section */
+.subtask-content {
+    border-top: 1px solid #e5eaf2;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+/* Responsive dashboard */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    .dashboard-header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .statistics-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .task-item {
+        display: block;
+    }
+
+    .search-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-header input,
+    .search-header select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .statistics-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dashboard-card {
+        padding: 16px;
+    }
+
+    .create-task-button,
+    .cancel-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
