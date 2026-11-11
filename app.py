@@ -26,7 +26,21 @@ app.config["SECRET_KEY"] = os.environ.get(
     "development-key-change-before-deployment"
 )
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///taskmanager.db"
+# Database configuration
+database_url = os.environ.get(
+    "DATABASE_URL",
+    "sqlite:///taskmanager.db"
+)
+
+# Render PostgreSQL URL compatibility
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace(
+        "postgres://",
+        "postgresql://",
+        1
+    )
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
@@ -119,7 +133,7 @@ class Task(db.Model):
 
 
 # =====================================
-# 5. SUBTASK MODEL — FEATURE 9
+# 5. SUBTASK MODEL
 # =====================================
 
 class SubTask(db.Model):
@@ -593,7 +607,7 @@ def delete_task(task_id):
 
 
 # =====================================
-# 12. FEATURE 9 — ADD SUBTASK
+# 12. ADD SUBTASK
 # =====================================
 
 @app.route(
@@ -605,8 +619,6 @@ def create_subtask(task_id):
     if "user_id" not in session:
         flash("Please login first.", "error")
         return redirect(url_for("login"))
-
-    # Check that this task belongs to the logged-in user.
 
     task = Task.query.filter_by(
         id=task_id,
@@ -646,7 +658,7 @@ def create_subtask(task_id):
 
 
 # =====================================
-# 13. FEATURE 9 — TOGGLE SUBTASK STATUS
+# 13. TOGGLE SUBTASK STATUS
 # =====================================
 
 @app.route(
@@ -658,8 +670,6 @@ def toggle_subtask(subtask_id):
     if "user_id" not in session:
         flash("Please login first.", "error")
         return redirect(url_for("login"))
-
-    # Verify that the subtask belongs to the user's task.
 
     subtask = (
         SubTask.query
@@ -688,7 +698,7 @@ def toggle_subtask(subtask_id):
 
 
 # =====================================
-# 14. FEATURE 9 — DELETE SUBTASK
+# 14. DELETE SUBTASK
 # =====================================
 
 @app.route(
@@ -700,8 +710,6 @@ def delete_subtask(subtask_id):
     if "user_id" not in session:
         flash("Please login first.", "error")
         return redirect(url_for("login"))
-
-    # Verify ownership through the parent task.
 
     subtask = (
         SubTask.query
@@ -763,7 +771,7 @@ def initialize_database():
 
     with app.app_context():
 
-        # Creates new tables, including the subtask table.
+        # Creates missing tables.
         # Existing tables and records are preserved.
 
         db.create_all()
@@ -796,11 +804,21 @@ def initialize_database():
 
 
 # =====================================
-# 18. RUN APPLICATION
+# 18. APPLICATION STARTUP
+# =====================================
+
+# Initialize database when the application starts.
+# This also runs when Gunicorn imports the application.
+
+initialize_database()
+
+
+# =====================================
+# 19. RUN APPLICATION LOCALLY
 # =====================================
 
 if __name__ == "__main__":
 
-    initialize_database()
-
-    app.run(debug=True)
+    app.run(
+        debug=os.environ.get("FLASK_DEBUG") == "1"
+    )
