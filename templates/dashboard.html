@@ -693,14 +693,19 @@
     }
 
     function toggleCreateTask() {
+    const form = document.getElementById("createTaskForm");
 
-        const form = document.getElementById("createTaskForm");
+    form.hidden = !form.hidden;
 
-        if (form) {
-            form.hidden = !form.hidden;
-        }
-
+    if (!form.hidden) {
+        requestAnimationFrame(() => {
+            form.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        });
     }
+}
 
     function toggleSubtasks(taskId) {
 
