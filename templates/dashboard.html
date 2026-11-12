@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Task Manager Dashboard</title>
 
     <link rel="stylesheet"
@@ -204,16 +203,35 @@
             {% endfor %}
         {% endwith %}
 
-        <!-- SEARCH, FILTER AND SORT -->
+        <!-- SEARCH AND MANAGE TASKS BUTTON -->
         <div class="dashboard-card">
+            <button type="button"
+                    class="create-task-button"
+                    onclick="toggleSearchTasks()">
+                Search and Manage Tasks
+            </button>
+        </div>
+
+        <!-- SEARCH, FILTER AND SORT -->
+        <div class="dashboard-card"
+             id="searchTasksSection"
+             hidden>
 
             <div class="search-header">
                 <h3>Search and Manage Tasks</h3>
 
-                <a href="{{ url_for('dashboard') }}"
-                   class="clear-button">
-                    Clear
-                </a>
+                <div>
+                    <a href="{{ url_for('dashboard') }}"
+                       class="clear-button">
+                        Clear
+                    </a>
+
+                    <button type="button"
+                            class="cancel-button"
+                            onclick="toggleSearchTasks()">
+                        Hide Search
+                    </button>
+                </div>
             </div>
 
             <form method="GET"
@@ -692,20 +710,54 @@
 
     }
 
+
     function toggleCreateTask() {
-    const form = document.getElementById("createTaskForm");
 
-    form.hidden = !form.hidden;
+        const form = document.getElementById("createTaskForm");
 
-    if (!form.hidden) {
-        requestAnimationFrame(() => {
-            form.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
+        form.hidden = !form.hidden;
+
+        if (!form.hidden) {
+
+            requestAnimationFrame(() => {
+
+                form.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
             });
-        });
+
+        }
+
     }
-}
+
+
+    function toggleSearchTasks() {
+
+        const section = document.getElementById("searchTasksSection");
+
+        if (!section) {
+            return;
+        }
+
+        section.hidden = !section.hidden;
+
+        if (!section.hidden) {
+
+            requestAnimationFrame(() => {
+
+                section.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            });
+
+        }
+
+    }
+
 
     function toggleSubtasks(taskId) {
 
